@@ -31,7 +31,7 @@ function LoginForm() {
     return (
         <div className="min-h-screen bg-slate-950 flex">
             {/* Left Panel – Branding */}
-            <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-emerald-950/30 to-slate-900 items-center justify-center p-12">
+            <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-emerald-950/30 to-slate-900 items-center justify-center p-12 relative border-r border-slate-800/50">
                 <div className="max-w-md">
                     <div className="flex items-center gap-3 mb-8">
                         <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-400 flex items-center justify-center text-2xl font-bold text-slate-900">
@@ -54,6 +54,14 @@ function LoginForm() {
                             </div>
                         ))}
                     </div>
+                </div>
+
+                {/* Professional Watermark */}
+                <div className="absolute bottom-8 left-12 flex items-center gap-3">
+                    <div className="h-px w-6 bg-emerald-500/50" />
+                    <p className="text-slate-500 text-xs font-semibold uppercase tracking-widest">
+                        Crafted by <span className="text-emerald-400/90 hover:text-emerald-400 transition-colors">Adnan Basil</span>
+                    </p>
                 </div>
             </div>
 

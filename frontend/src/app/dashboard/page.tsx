@@ -154,15 +154,36 @@ function DashboardContent() {
                     {categoryData.length > 0 ? (
                         <ResponsiveContainer width="100%" height={300}>
                             <PieChart>
-                                <Pie data={categoryData} cx="50%" cy="50%" innerRadius={60} outerRadius={90} paddingAngle={4} dataKey="value">
+                                <Pie 
+                                    data={categoryData} 
+                                    cx="50%" cy="50%" 
+                                    innerRadius={65} outerRadius={90} 
+                                    paddingAngle={6} dataKey="value" stroke="none"
+                                    labelLine={false}
+                                    label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
+                                        const angle = midAngle || 0;
+                                        const p = percent || 0;
+                                        const radius = (innerRadius || 65) + ((outerRadius || 90) - (innerRadius || 65)) * 0.5;
+                                        const x = (cx || 0) + radius * Math.cos(-angle * Math.PI / 180);
+                                        const y = (cy || 0) + radius * Math.sin(-angle * Math.PI / 180);
+                                        if (p < 0.05) return null;
+                                        return (
+                                            <text x={x} y={y} fill="white" fontSize="12" fontWeight="bold" textAnchor="middle" dominantBaseline="central">
+                                                {`${(p * 100).toFixed(0)}%`}
+                                            </text>
+                                        );
+                                    }}
+                                >
                                     {categoryData.map((_, i) => (
                                         <Cell key={i} fill={COLORS[i % COLORS.length]} />
                                     ))}
                                 </Pie>
                                 <Tooltip
-                                    contentStyle={{ backgroundColor: "#0f172a", border: "1px solid #1e293b", borderRadius: "12px" }}
+                                    formatter={(value: number | undefined) => [`$${(value || 0).toLocaleString()}`, "Amount"]}
+                                    contentStyle={{ backgroundColor: "#0f172a", border: "1px solid #1e293b", borderRadius: "12px", color: "#fff" }}
+                                    itemStyle={{ color: "#fff" }}
                                 />
-                                <Legend wrapperStyle={{ fontSize: "12px" }} />
+                                <Legend wrapperStyle={{ fontSize: "14px", paddingTop: "20px" }} />
                             </PieChart>
                         </ResponsiveContainer>
                     ) : (

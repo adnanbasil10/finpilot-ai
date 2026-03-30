@@ -3,9 +3,9 @@ Budgets router – create and list monthly category budgets.
 Includes Redis caching and optimized single-query spending calculation.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
-from sqlalchemy import func, and_
+from sqlalchemy import func
 from app.database import get_db
 from app.models.user import User
 from app.models.budget import Budget

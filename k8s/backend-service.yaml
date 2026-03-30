@@ -1,0 +1,19 @@
+# ──────────────────────────────────────────────────────────────────
+# FinPilot AI – Backend Service
+# ──────────────────────────────────────────────────────────────────
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: finpilot
+  labels:
+    app.kubernetes.io/name: finpilot
+    app.kubernetes.io/component: backend
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/component: backend
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP

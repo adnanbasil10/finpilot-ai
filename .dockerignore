@@ -1,0 +1,38 @@
+# ── Git ──────────────────────────────────────────────────────────
+.git
+.gitignore
+
+# ── Node ─────────────────────────────────────────────────────────
+frontend/node_modules
+frontend/.next
+frontend/.env*
+
+# ── Python ───────────────────────────────────────────────────────
+backend/__pycache__
+backend/**/__pycache__
+backend/.pytest_cache
+backend/.ruff_cache
+backend/venv
+backend/.venv
+
+# ── Environment & Secrets ────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── IDE ──────────────────────────────────────────────────────────
+.vscode
+.idea
+*.swp
+*.swo
+
+# ── Docs & CI ────────────────────────────────────────────────────
+README.md
+*.md
+.github
+Jenkinsfile
+k8s
+
+# ── OS ───────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

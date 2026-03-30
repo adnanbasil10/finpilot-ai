@@ -1,0 +1,39 @@
+# ── Environment & Secrets ────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Python ───────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+backend/venv/
+backend/.venv/
+*.egg-info/
+
+# ── Node.js ──────────────────────────────────────────────────────
+node_modules/
+.next/
+out/
+
+# ── Docker ───────────────────────────────────────────────────────
+pgdata/
+redisdata/
+
+# ── Kubernetes (never commit real secrets) ───────────────────────
+# k8s/secrets.yaml  ← uncomment if using real secrets
+
+# ── Jenkins ──────────────────────────────────────────────────────
+.jenkins/
+
+# ── IDE ──────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── OS ───────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log

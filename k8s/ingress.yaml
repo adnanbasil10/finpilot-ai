@@ -1,0 +1,54 @@
+# ──────────────────────────────────────────────────────────────────
+# FinPilot AI – Ingress (nginx)
+# ──────────────────────────────────────────────────────────────────
+# Routes external traffic to frontend and backend services.
+# Requires: nginx-ingress controller installed on the cluster.
+#
+# Install on EKS:
+#   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/aws/deploy.yaml
+# ──────────────────────────────────────────────────────────────────
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: finpilot-ingress
+  namespace: finpilot
+  labels:
+    app.kubernetes.io/name: finpilot
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+spec:
+  ingressClassName: nginx
+  rules:
+    # ── Frontend ─────────────────────────────────────────────────
+    - host: finpilot.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-service
+                port:
+                  number: 80
+
+    # ── Backend API ──────────────────────────────────────────────
+    - host: api.finpilot.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 8000
+
+  # ── TLS (uncomment when cert-manager is configured) ──────────
+  # tls:
+  #   - hosts:
+  #       - finpilot.example.com
+  #       - api.finpilot.example.com
+  #     secretName: finpilot-tls

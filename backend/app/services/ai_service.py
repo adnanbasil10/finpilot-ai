@@ -13,10 +13,10 @@ settings = get_settings()
 
 
 def get_ai_client() -> OpenAI:
-    """Initialize the OpenRouter-compatible OpenAI client."""
+    """Initialize the Groq-compatible OpenAI client."""
     return OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=settings.OPENROUTER_API_KEY,
+        base_url="https://api.groq.com/openai/v1",
+        api_key=settings.GROQ_API_KEY,
     )
 
 
@@ -76,7 +76,7 @@ Be specific. Reference actual numbers. Be encouraging but honest."""
     try:
         client = get_ai_client()
         response = client.chat.completions.create(
-            model=settings.OPENROUTER_MODEL,
+            model=settings.GROQ_MODEL,
             messages=[
                 {"role": "system", "content": "You are FinPilot AI, an expert financial advisor. Always respond with valid JSON only."},
                 {"role": "user", "content": prompt},
@@ -118,5 +118,5 @@ Be specific. Reference actual numbers. Be encouraging but honest."""
         return {
             "summary": "AI analysis is temporarily unavailable. Please try again later.",
             "highlights": [],
-            "recommendations": ["Ensure your OpenRouter API key is configured correctly."],
+            "recommendations": ["Ensure your Groq API key is configured correctly."],
         }
